@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ArtistController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/artist', [ArtistController::class, 'index']);
+Route::get('/artist/{id}', [ArtistController::class, 'show'])->where('id', '[0-9]+');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

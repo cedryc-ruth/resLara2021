@@ -16,6 +16,9 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
         $this->call([
             ArtistSeeder::class,
+            TypeSeeder::class,
+            LocalitySeeder::class,
+            RoleSeeder::class
         ]);
     }
 }

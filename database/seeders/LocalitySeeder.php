@@ -16,7 +16,10 @@ class LocalitySeeder extends Seeder
     public function run()
     {
         //Empty the table first
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
         Locality::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
+
 
         //Define data
         $localities = [
@@ -26,6 +29,7 @@ class LocalitySeeder extends Seeder
             ['postal_code'=>'1030','locality'=>'Schaerbeek'],
             ['postal_code'=>'1040','locality'=>'Etterbeek'],
             ['postal_code'=>'1050','locality'=>'Ixelles'],
+            ['postal_code'=>'1170','locality'=>'Watermael-Boistfort'],
         ];
         
         //Insert data in the table

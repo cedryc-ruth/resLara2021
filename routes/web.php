@@ -6,6 +6,7 @@ use App\Http\Controllers\TypeController;
 use App\Http\Controllers\LocalityController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\ShowController;
 
 
 /*
@@ -37,6 +38,9 @@ Route::get('/role/{id}', [RoleController::class, 'show'])->where('id', '[0-9]+')
 
 Route::get('location', [LocationController::class, 'index'])->name('location_index');
 Route::get('location/{id}', [LocationController::class, 'show'])->where('id', '[0-9]+')->name('location_show');
+
+Route::get('/show', [ShowController::class, 'index'])->name('show_index');
+Route::get('/show/{id}', [ShowController::class, 'show'])->where('id', '[0-9]+')->name('show_show');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

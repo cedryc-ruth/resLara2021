@@ -68,6 +68,7 @@ class LocationSeeder extends Seeder
             $data['slug'] = Str::slug($data['designation'],'-');
             $data['locality_id'] = $locality->id;	//Référence à la table localities
         }
+        unset($data);
 
         DB::table('locations')->insert($locations);
     }

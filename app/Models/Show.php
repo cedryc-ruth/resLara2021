@@ -55,11 +55,11 @@ class Show extends Model
     }
 
     /**
-     * Get the performance (artist in a type of collaboration) for the show
+     * Get the performances (artists in a type of collaboration) for the show
      */
-    public function artistType()
+    public function artistTypes()
     {
-        return $this->belongsTo(ArtistType::class);
+        return $this->belongsToMany(ArtistType::class);
     }
 
 }

@@ -54,4 +54,12 @@ class Show extends Model
         return $this->hasMany(Representation::class);
     }
 
+    /**
+     * Get the performance (artist in a type of collaboration) for the show
+     */
+    public function artistType()
+    {
+        return $this->belongsTo(ArtistType::class);
+    }
+
 }

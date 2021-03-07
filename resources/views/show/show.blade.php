@@ -23,6 +23,25 @@
         @else
         <p><em>Non réservable</em></p>
         @endif
+
+        <h2>Liste des représentations</h2>
+        @if($show->representations->count()>=1)
+        <ul>
+            @foreach ($show->representations as $representation)
+                <li>{{ $representation->when }} 
+                @if($representation->location)
+                ({{ $representation->location->designation }})
+                @elseif($representation->show->location)
+                ({{ $representation->show->location->designation }})
+                @else
+                (lieu à déterminer)
+                @endif
+                </li>              
+            @endforeach
+        </ul>
+        @else
+        <p>Aucune représentation</p>
+        @endif
     </article>
     
     <nav><a href="{{ route('show_index') }}">Retour à l'index</a></nav>

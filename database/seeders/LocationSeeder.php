@@ -59,17 +59,18 @@ class LocationSeeder extends Seeder
             ],
         ];
         
-        //Insert data in the table
+        //Prepare the data
         foreach ($locations as &$data) {
-            //Recherche de la localité correspondant au code postal
+            //Search the locality for a given postal code
             $locality = Locality::firstWhere('postal_code',$data['locality_postal_code']);
             unset($data['locality_postal_code']);
 
             $data['slug'] = Str::slug($data['designation'],'-');
-            $data['locality_id'] = $locality->id;	//Référence à la table localities
+            $data['locality_id'] = $locality->id;	//Reference to localities table
         }
         unset($data);
 
+        //Insert data in the table
         DB::table('locations')->insert($locations);
     }
 }

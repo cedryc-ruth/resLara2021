@@ -18,7 +18,9 @@ class ShowSeeder extends Seeder
     public function run()
     {
         //Empty the table first
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
         Show::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
         
         //Define data
         $shows = [

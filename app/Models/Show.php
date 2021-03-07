@@ -46,4 +46,12 @@ class Show extends Model
         return $this->belongsTo(Location::class);
     }
 
+    /**
+     * Get the representations of this show.
+     */
+    public function representations()
+    {
+        return $this->hasMany(Representation::class);
+    }
+
 }

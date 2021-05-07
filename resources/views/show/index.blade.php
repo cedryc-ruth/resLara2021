@@ -10,7 +10,7 @@
 
         <ul>
         @foreach($shows as $show)
-            <li v-if="seen" href="{{ $show->bookable }}">
+            <li :class="{ hide: filter && 1!={{ $show->bookable }} }">
                 <a href="{{ route('show_show', $show->id) }}">{{ $show->title }}</a>
                 @if($show->bookable)
                 <span>{{ $show->price }} €</span>
@@ -26,23 +26,62 @@
             </li>
         @endforeach
         </ul>
+
+        <ul>
+            <template v-for="show in shows"  :key="show.id">
+                <li v-if="!filter || 1==show.bookable" v-html="show.title"></li>
+            </template>
+        </ul>
+ 
+        <ul>
+            <li v-for="item in items">@{{ item.datasetid }}</li>
+        </ul>
     </div>
+@endsection
+
+@section('style')
+<style>
+.hide { display: none }
+.block { display: block }
+</style>
 @endsection
 
 @section('script')
 <script src="https://unpkg.com/vue@next"></script>
 <script>
+const API_URL = 'http://localhost:8000';
 const vm = Vue.createApp({
     data() {
         return {
-            seen: true,
+            filter: false,
+            shows: [
+            @foreach($shows as $show)   
+                { id: {{ $show->id }}, title: '{{ $show->title }}', bookable: {{ $show->bookable }} },
+            @endforeach
+            ],
+            items: null
         }
     },
     methods: {
         filterShows() {
-            this.seen = !this.seen
+            this.filter = !this.filter
         }
+    }, mounted() {
+        console.log('Monté !');
+
+        fetch(API_URL+'/api/shows')
+            .then(function(response) {
+                return response.json()
+            })
+            .then((data) => {   console.log(data)
+                this.items = data
+            })
+            .catch(function(error) {
+                console.log(error)
+            });
     }
-}).mount('#vueFilter');
+});
+
+vm.mount('#vueFilter');
 </script>
 @endsection

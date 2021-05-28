@@ -50,4 +50,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
+//Route des flux RSS
+Route::feeds();
+
 require __DIR__.'/auth.php';

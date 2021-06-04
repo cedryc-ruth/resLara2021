@@ -24,18 +24,31 @@
             @endif
         </address>
         
-        <form action="{{ route('location_note',$location->id) }}" method="post">
+        <form action="{{ route('location_note',$location->id)}}" method="post"> 
             @csrf
             <select name="note">
                 <option>Votre note</option>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
+            @for($i=1;$i<=5;$i++)
+                <option @if($i==$note) {{ 'selected' }} @endif>{{ $i }}</option>
+            @endfor
             </select>
             <button>Noter</button>
         </form>
+        @if(Session::has('success'))
+        <p class="alert alert-success">{{ Session::get('success') }}</p>
+        @elseif(Session::has('error'))
+        <p class="alert alert-danger">{{ Session::get('error') }}</p>
+        @endif
+
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
 
         <h2>Liste des spectacles</h2>
         <ul>

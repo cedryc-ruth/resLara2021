@@ -8,6 +8,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\ShowController;
 use App\Http\Controllers\RepresentationController;
+use App\Http\Controllers\AgentController;
 
 
 /*
@@ -52,5 +53,8 @@ Route::get('/dashboard', function () {
 
 //Route des flux RSS
 Route::feeds();
+
+Route::get('/agent', [AgentController::class, 'index'])->name('agent_index');
+
 
 require __DIR__.'/auth.php';

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Artist extends Model
+class Agent extends Model
 {
     use HasFactory;
 
@@ -14,14 +14,14 @@ class Artist extends Model
      *
      * @var array
      */
-    protected $fillable = ['firstname', 'lastname', 'agent'];
+    protected $fillable = ['name'];
 
    /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'artists';
+    protected $table = 'agents';
 
    /**
      * Indicates if the model should be timestamped.
@@ -33,17 +33,9 @@ class Artist extends Model
     /**
      * The types that belong to the artist.
      */
-    public function types()
+    public function artists()
     {
-        return $this->belongsToMany(Type::class);
-    }
-
-    /**
-     * The agent that represents the artist.
-     */
-    public function agent()
-    {
-        return $this->belongsTo(Agent::class);
+        return $this->hasMany(Artist::class);
     }
 
 }

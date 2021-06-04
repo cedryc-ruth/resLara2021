@@ -24,6 +24,19 @@
             @endif
         </address>
         
+        <form action="{{ route('location_note',$location->id) }}" method="post">
+            @csrf
+            <select name="note">
+                <option>Votre note</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select>
+            <button>Noter</button>
+        </form>
+
         <h2>Liste des spectacles</h2>
         <ul>
         @foreach($location->shows as $show)

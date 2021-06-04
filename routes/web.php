@@ -40,6 +40,7 @@ Route::get('/role/{id}', [RoleController::class, 'show'])->where('id', '[0-9]+')
 
 Route::get('location', [LocationController::class, 'index'])->name('location_index');
 Route::get('location/{id}', [LocationController::class, 'show'])->where('id', '[0-9]+')->name('location_show');
+Route::post('/location/{id}/note', [LocationController::class, 'note'])->name('location_note');
 
 Route::get('/show', [ShowController::class, 'index'])->name('show_index');
 Route::get('/show/{id}', [ShowController::class, 'show'])->where('id', '[0-9]+')->name('show_show');

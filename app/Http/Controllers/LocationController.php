@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Location;
 
 class LocationController extends Controller
@@ -90,5 +92,33 @@ class LocationController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function note(Request $request, $id)
+    {
+        //TODO Validation
+        $note = $request->note;
+        $userId = Auth::id();
+        $locationId = $id;
+
+        //LocationNote::update()
+        DB::table('user_location')
+            ->updateOrInsert(
+                ['user_id' => $userId,'location_id'=>$locationId],
+                ['note' => $note]
+            );
+
+        $location = Location::find($id);
+
+        return view('location.show',[
+            'location' => $location,
+        ]);
     }
 }

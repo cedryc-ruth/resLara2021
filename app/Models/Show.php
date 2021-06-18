@@ -62,4 +62,12 @@ class Show extends Model
         return $this->belongsToMany(ArtistType::class);
     }
 
+    /**
+     * Get the keywords for the show
+     */
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
+
 }

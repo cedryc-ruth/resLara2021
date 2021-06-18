@@ -4,9 +4,9 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use App\Models\Role;
+use App\Models\Tag;
 
-class RoleSeeder extends Seeder
+class TagSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -17,17 +17,17 @@ class RoleSeeder extends Seeder
     {
         //Empty the table first
         DB::statement('SET FOREIGN_KEY_CHECKS=0');
-        Role::truncate();
+        Tag::truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
         //Define data
-        $roles = [
-            ['role'=>'admin'],
-            ['role'=>'member'],
-            ['role'=>'affiliate'],
+        $tags = [
+            ['tag'=>'soleil'],
+            ['tag'=>'écologie'],
+            ['tag'=>'mer'],
         ];
         
         //Insert data in the table
-        DB::table('roles')->insert($roles);
+        DB::table('tags')->insert($tags);
     }
 }

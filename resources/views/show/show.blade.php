@@ -65,7 +65,76 @@
             @elseif(!$loop->last), @endif
         @endforeach
         </p>
+
+        <h2>Liste des mots-clés</h2>
+        @if($show->tags->count()>=1)
+        <ul>
+            @foreach ($show->tags as $tag)
+                <li><a href="{{ route('tag_show', $tag->id) }}">{{ $tag->tag }}</a></li>  
+            @endforeach
+        </ul>
+        @else
+        <p>Aucun mot-clé</p>
+        @endif
+
+    @if(Auth::check() && Auth::user()->isAdmin())
+        <form method="post" action="{{ route('tag_new') }}">
+            @csrf
+            <div>
+                <input type="text" name="tag">
+                <span class="helper"></span>
+            </div>
+            <input type="hidden" name="show_id" value="{{ $show->id }}">
+            <button>Ajouter</button>
+        </form>
+
+        @if(Session::has('message'))
+        <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
+        @endif
+    @endif
+
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
     </article>
     
     <nav><a href="{{ route('show_index') }}">Retour à l'index</a></nav>
+@endsection
+
+@section('script')
+<script>
+const tagField = document.querySelector('form input[name=tag]');
+
+tagField.addEventListener('keyup', function(data) {
+    const API_URL = '{{ env('APP_URL') }}' +'/api';
+
+    let newTag = tagField.value;
+
+    const spanHelper = document.querySelector('input[name=tag] + span.helper');
+
+    //Envoyer requête AJAX
+    const options = {
+        method: 'GET',
+        mode: 'cors',
+    };
+
+    fetch(API_URL+"/show/"+{{ $show->id }}+"/tag/"+newTag,options)
+    .then(function(response) {
+        return response.json();
+    }).then(function(data) {
+        if(data.data.length!=0) {
+            //Afficher message
+            spanHelper.innerHTML = 'Ce mot-clé est déjà associé à ce spectacle !';
+        } else {
+            spanHelper.innerHTML = '';
+        }
+    });
+});
+</script>
 @endsection

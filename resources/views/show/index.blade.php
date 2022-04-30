@@ -23,4 +23,6 @@
     </li>
     @endforeach
     </ul>
+
+    {{ $shows->onEachSide(5)->links() }}
 @endsection

@@ -5,6 +5,9 @@
 @section('content')
     <h1>Liste des {{ $resource }}</h1>
 
+    <ul>
+        <li><a href="{{ route('artist.create') }}">Ajouter</a></li>    
+    </ul>
     <table>
         <thead>
             <tr>
@@ -16,7 +19,7 @@
         @foreach($artists as $artist)
             <tr>
                 <td>{{ $artist->firstname }}</td>
-                <td><a href="{{ route('artist_show', $artist->id) }}">{{ $artist->lastname }}</a></td>
+                <td><a href="{{ route('artist.show', $artist->id) }}">{{ $artist->lastname }}</a></td>
             </tr>
         @endforeach
         </tbody>

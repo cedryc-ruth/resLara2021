@@ -30,6 +30,13 @@
             <li>{{ $show->title }}</li>
         @endforeach
         </ul>
+
+        <h2>Liste des salles</h2>
+        <ul>
+        @foreach($location->rooms as $room)
+            <li>{{ $room->name }} ({{ $room->seats }} places)</li>
+        @endforeach
+        </ul>
     </article>
     
     <nav><a href="{{ route('location_index') }}">Retour à l'index</a></nav>

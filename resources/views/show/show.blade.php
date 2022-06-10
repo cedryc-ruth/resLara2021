@@ -27,15 +27,15 @@
         <h2>Liste des représentations</h2>
         @if($show->representations->count()>=1)
         <ul>
-            @foreach ($show->representations as $representation)
+                @foreach ($show->representations as $representation)
                 <li>{{ $representation->when }} 
-                @if($representation->location)
-                ({{ $representation->location->designation }})
+                @if($representation->room)
+                &commat; {{ $representation->room->location->designation }} ({{ $representation->room->name }})
                 @elseif($representation->show->location)
                 ({{ $representation->show->location->designation }})
                 @else
                 (lieu à déterminer)
-                @endif
+                @endif 
                 </li>              
             @endforeach
         </ul>

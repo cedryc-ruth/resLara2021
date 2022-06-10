@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use App\Models\Location;
-use App\ Models\Locality;
+use App\Models\Locality;
 
 class LocationSeeder extends Seeder
 {

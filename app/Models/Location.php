@@ -54,11 +54,19 @@ class Location extends Model
     }
 
     /**
+     * Get the rooms in this location.
+     */
+    public function rooms()
+    {
+        return $this->hasMany(Room::class);
+    }
+
+    /**
      * Get the representations in this location.
      */
     public function representations()
     {
-        return $this->hasMany(Representation::class);
+        return $this->hasMany(Room::class)->hasMany(Representation::class);
     }
 
 }

@@ -9,6 +9,7 @@ use App\Http\Controllers\LocationController;
 use App\Http\Controllers\ShowController;
 use App\Http\Controllers\RepresentationController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\RoomController;
 
 
 /*
@@ -46,6 +47,12 @@ Route::get('/show/{id}', [ShowController::class, 'show'])->where('id', '[0-9]+')
 
 Route::get('/representation', [RepresentationController::class, 'index'])->name('representation_index');
 Route::get('/representation/{id}', [RepresentationController::class, 'show'])->where('id', '[0-9]+')->name('representation_show');
+Route::get('/representation/create', [RepresentationController::class, 'create'])->name('representation_create');
+Route::post('/representation', [RepresentationController::class, 'store'])->name('representation_store');
+
+Route::get('/room', [RoomController::class, 'index'])->name('room_index');
+Route::get('/room/{id}', [RoomController::class, 'show'])->where('id', '[0-9]+')->name('room_show');
+Route::get('/room/{id}/shows', [RoomController::class, 'findShowsByRoom'])->where('id', '[0-9]+')->name('room_findShowsByRoom');
 
 Route::post('/tag', [TagController::class, 'store'])->name('tag_new');
 Route::get('/tag/{id}', [TagController::class, 'show'])->where('id', '[0-9]+')->name('tag_show');

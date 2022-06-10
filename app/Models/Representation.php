@@ -35,11 +35,11 @@ class Representation extends Model
     public $timestamps = false;
     
     /**
-     * Get the actual location of the representation
+     * Get the actual room of the representation
      */
-    public function location()
+    public function room()
     {
-        return $this->belongsTo(Location::class);
+        return $this->belongsTo(Room::class);
     }
     
     /**
